@@ -12,6 +12,10 @@
 	The bulk of this assignment is implementing `ClozeCard`. If you build a robust `ClozeCard` implementation, feel free to try your hand at implementing a front-end, as well. 
 */
 
+var ClozeCard = function(front, back){
+  this.front = front;
+  this.back = back;
+}
 
 
 
@@ -19,6 +23,4 @@
 
 
 
-
-
-//module.exports = ClozeCard
+module.exports = ClozeCard
