@@ -11,7 +11,7 @@ var ClozeCard = require("./ClozeCard.js");
 
 //////////////////////////////////////////////////////////// Main Logic /////////////////////////////////////////////////////////////
 
-flashcards = function(){
+function flashcards(){
 
 	 	inquirer.prompt([
 	 		{
@@ -22,24 +22,26 @@ flashcards = function(){
             }
         ]).then(function(choice) {
 
-            if (choice.userType === 'run-basic-cards') {
-               basicCardStart();
-            } else if (choice.userType === 'run-cloze-cards') {
+            if (cardStyle.choice === 'run-basic-cards') {
+                console.log(cardStyle.choice + "selected");
+                // basicCardStart();
+            } else if (choice.userType === 'run-cloze-cards'){
                 
 
             } else if (choice.userType === 'quit') {
                 console.log('Thank you for playing!');
             }
-        });
+            
 
-} // End of flashcards function
+        }); // End of inquirer prompt
 
+}  // End of flashcards function
 /////////////////////////////////////////////////////////////// Functions ///////////////////////////////////////////////////////////
 
 // function basicCardStart(){
 //         inquirer.prompt([
 //             {
-//                 type: 'list',
+//                 type: 'input',
 //                 name: 'question',
 //                 message: 'What style of flash cards do you want to use?',
 //                 validate: function (input) {
@@ -47,9 +49,9 @@ flashcards = function(){
 //                 }
 //             }
 //         ]).then(function(choice) {
-
+//             choice.userInput
 //         }
-// }
+// } // End basicCardStart function
 
 var questionOneB = new BasicCard("Who was the first president of the United States?","George Washington");
 var questionTwoB = new BasicCard("What year was the federal reserve banking system get estblished into federal law?","1913");
@@ -64,7 +66,7 @@ var questionFourC = new ClozeCard("What country has the highest debt to GDP rati
 var basicQuestionArray = [questionOneB,questionTwoB,questionThreeB,questionFourB];
 var clozeQuestionArray = [questionOneC,questionTwoC,questionThreeC,questionFourC];
 
-// flashcards();
+// console.log(basicQuestionArray[0].front)
+// console.log(clozeQuestionArray[0])
 
-console.log(basicQuestionArray[0].front)
-console.log(clozeQuestionArray[0])
+flashcards();
