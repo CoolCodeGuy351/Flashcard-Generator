@@ -3,8 +3,7 @@ var fs = require('fs');
 var BasicCard = require("./BasicCard.js");
 var ClozeCard = require("./ClozeCard.js");
 
-
-
+var count = 0;
 
 //validate: (Function) Receive the user input and should return true if the value is valid,
 //and an error message (String) otherwise. If false is returned, a default error message is provided.
@@ -14,7 +13,7 @@ var ClozeCard = require("./ClozeCard.js");
 function flashcards(){
 
 	 	inquirer.prompt([
-	 		{
+	 		      {
                 type: 'list',
                 name: 'cardStyle',
                 message: 'What style of flash cards do you want to use?',
@@ -22,51 +21,85 @@ function flashcards(){
             }
         ]).then(function(choice) {
 
-            if (cardStyle.choice === 'run-basic-cards') {
-                console.log(cardStyle.choice + "selected");
-                // basicCardStart();
-            } else if (choice.userType === 'run-cloze-cards'){
-                
-
-            } else if (choice.userType === 'quit') {
-                console.log('Thank you for playing!');
+            if (choice.cardStyle === 'run-basic-cards') {     
+              basicCardStart();
+            } else if (choice.cardStyle === 'run-cloze-cards'){
+              clozeCardStart();
+            } else if (choice.cardStyle === 'quit') {
+              console.log('Thank you for playing!');
             }
-            
 
-        }); // End of inquirer prompt
+            }) // End Then   
 
 }  // End of flashcards function
+
 /////////////////////////////////////////////////////////////// Functions ///////////////////////////////////////////////////////////
 
-// function basicCardStart(){
-//         inquirer.prompt([
-//             {
-//                 type: 'input',
-//                 name: 'question',
-//                 message: 'What style of flash cards do you want to use?',
-//                 validate: function (input) {
+function basicCardStart(){
 
-//                 }
-//             }
-//         ]).then(function(choice) {
-//             choice.userInput
-//         }
-// } // End basicCardStart function
+      if(count < 3){
 
-var questionOneB = new BasicCard("Who was the first president of the United States?","George Washington");
+      inquirer.prompt([
+             {
+                type: 'input',
+                name: 'question',
+                message: basicQuestionArray[count].front,
+             }
+         ]).then(function(answer) {
+            if(answer.question ==  basicQuestionArray[count].back){
+                console.log("Correct!");
+            } else {
+                console.log("Incorrect! The correct answer is: " + basicQuestionArray[count].back)
+            }
+            count++;
+
+            if(count >= 3){
+              count = 0;
+              flashcards();
+            }
+            basicCardStart();
+         }) // End Then
+
+    } // End If
+
+} // // End basicCardStart function
+
+function clozeCardStart(){
+
+      if(count < 3){
+
+      inquirer.prompt([
+             {
+                type: 'input',
+                name: 'question',
+                message: clozeQuestionArray[count].partial()
+             }
+         ]).then(function(answer) {
+            
+            count++;
+
+            if(count >= 3){
+              count = 0;
+              flashcards();
+            }
+            clozeCardStart();
+         }) // End Then
+
+    } // End If
+
+} // // End clozeCardStart function
+
+var questionOneB = new BasicCard("Who was the first president of the United States?","george washington");
 var questionTwoB = new BasicCard("What year was the federal reserve banking system get estblished into federal law?","1913");
-var questionThreeB = new BasicCard("Who is the current chairperson of the Federal Reserve Board?","Janet Yellen");
-var questionFourB = new BasicCard("What country has the highest debt to GDP ratio?","Japan");
+var questionThreeB = new BasicCard("Who is the current chairperson of the Federal Reserve Board?","janet yellen");
+var questionFourB = new BasicCard("What country has the highest debt to GDP ratio?","japan");
 
-var questionOneC = new ClozeCard("Who was the first president of the United States?","George Washington");
-var questionTwoC = new ClozeCard("What year was the federal reserve banking system get estblished into federal law?","1913");
-var questionThreeC = new ClozeCard("Who is the current chairperson of the Federal Reserve Board?","Janet Yellen");
-var questionFourC = new ClozeCard("What country has the highest debt to GDP ratio?","Japan");
+var questionOneC = new ClozeCard("george washington was the first president of the United States?","george washington");
+var questionTwoC = new ClozeCard("1913 was the year was the federal reserve banking system get estblished into federal law?","1913");
+var questionThreeC = new ClozeCard("janet yellen is the current chairperson of the Federal Reserve Board?","janet yellen");
+var questionFourC = new ClozeCard("japan country has the highest debt to GDP ratio?","japan");
 
 var basicQuestionArray = [questionOneB,questionTwoB,questionThreeB,questionFourB];
 var clozeQuestionArray = [questionOneC,questionTwoC,questionThreeC,questionFourC];
-
-// console.log(basicQuestionArray[0].front)
-// console.log(clozeQuestionArray[0])
 
 flashcards();
