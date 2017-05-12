@@ -5,8 +5,19 @@ var ClozeCard = require("./ClozeCard.js");
 var score = 0;
 var count = 0;
 
-//validate: (Function) Receive the user input and should return true if the value is valid,
-//and an error message (String) otherwise. If false is returned, a default error message is provided.
+var questionOneB = new BasicCard("Who was the first president of the United States?","George Washington");
+var questionTwoB = new BasicCard("What year was the federal reserve banking system get estblished into federal law?","1913");
+var questionThreeB = new BasicCard("Who is the current chairperson of the Federal Reserve Board?","Janet Yellen");
+var questionFourB = new BasicCard("What country has the highest debt to GDP ratio?","Japan");
+
+var questionOneC = new ClozeCard("George Washington was the first president of the United States.","George Washington");
+var questionTwoC = new ClozeCard("The federal reserve banking system was estblished into federal law on December 23rd of the year 1913.","1913");
+var questionThreeC = new ClozeCard("Janet Yellen is the current chairperson of the Federal Reserve Board?","Janet Yellen");
+var questionFourC = new ClozeCard("Of all the developed counties in the world, Japan, has the most debt relative to its GDP.","Japan");
+
+var basicQuestionArray = [questionOneB,questionTwoB,questionThreeB,questionFourB];
+var clozeQuestionArray = [questionOneC,questionTwoC,questionThreeC,questionFourC];
+
 
 //////////////////////////////////////////////////////////// Main Logic /////////////////////////////////////////////////////////////
 
@@ -118,18 +129,5 @@ function clozeCardStart(){
          }) // End Then
 
 } // // End clozeCardStart function
-
-var questionOneB = new BasicCard("Who was the first president of the United States?","George Washington");
-var questionTwoB = new BasicCard("What year was the federal reserve banking system get estblished into federal law?","1913");
-var questionThreeB = new BasicCard("Who is the current chairperson of the Federal Reserve Board?","Janet Yellen");
-var questionFourB = new BasicCard("What country has the highest debt to GDP ratio?","Japan");
-
-var questionOneC = new ClozeCard("George Washington was the first president of the United States.","George Washington");
-var questionTwoC = new ClozeCard("The federal reserve banking system was estblished into federal law on December 23rd of the year 1913.","1913");
-var questionThreeC = new ClozeCard("Janet Yellen is the current chairperson of the Federal Reserve Board?","Janet Yellen");
-var questionFourC = new ClozeCard("Of all the developed counties in the world, Japan, has the most debt relative to its GDP.","Japan");
-
-var basicQuestionArray = [questionOneB,questionTwoB,questionThreeB,questionFourB];
-var clozeQuestionArray = [questionOneC,questionTwoC,questionThreeC,questionFourC];
 
 flashcards();
